@@ -1,0 +1,53 @@
+<div data-ng-controller="ContactsController" data-ng-init="find()">
+<div class="row " >
+    <section class="content-header">
+        <h1><i class="fa fa-users"></i>
+            Contacts
+            <span style="float:right;padding-right:20px;"><a ng-click="contactAdd()"><i class="fa fa-plus"></i></a></span>
+        </h1>
+    </section>
+</div>
+<div class="row" >
+    <section class="col-xs-5 col-sm-5 col-md-5 col-lg-5 content-left">
+        <div class="row" ng-if="contacts.length">
+            <section class="col-lg-12 connectedSortable">
+                <div class="row">
+                    <section class="col-lg-12 connectedSortable">
+                        <div class="box">
+                            <div class="box-body contact chat" id="contact-list">
+                                <div class="item" ng-repeat="contact in contacts" ng-click="onContactSelect(contact)">
+                                    <img user-avatar="" user-id="contact._id" class="online" src="dist/img/avatar.png" alt="User Image">
+                                    <p class="message ng-binding">
+                                        <span class="name" ng-bind="contact.name"></span>
+                                        <span class="mobile" ng-bind="contact.mobile"></span>
+
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </section>
+        </div>
+    </section>
+    <!-- Main content -->
+    <section class=" col-xs-7 col-sm-7 col-md-7 col-lg-7 content">
+        <!-- Small boxes (Stat box) -->
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12">
+                <contact-view contact="contactedUser" on-delete-contact="remove" on-edit-contact="onEditContact" ng-if="contactedUser && mode == 'view'"></contact-view>
+                <contact-add on-submit="create" ng-if="mode == 'add'"></contact-add>
+                <contact-edit contact="contactedUser" on-edit-submit="update" ng-if="contactedUser && mode == 'edit'"></contact-edit>
+            </section><!-- /.Left col -->
+        </div><!-- /.row (main row) -->
+
+    </section><!-- /.content -->
+
+</div>
+    <div class="text-center" data-ng-hide="!contacts.$resolved || contacts.length">
+        No Contacts yet, why don't you <a ng-click="contactAdd()">create one</a>?
+    </div>
+</div>

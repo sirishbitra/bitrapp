@@ -1,0 +1,18 @@
+
+
+<section>
+	<div class="page-header">
+		<h2>{{contact.name}}</h2>
+		<h4>+{{contact.ccode}} {{contact.mobile}}</h4>
+
+	</div>
+	<div class="pull-right" data-ng -show="((authentication.user) && (authentication.user._id == contact._id))">
+		<a class="btn btn-primary"ng-click="onEditContact(contact)">
+			<i class="fa fa-pencil"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="onDeleteContact(contact);">
+			<i class="fa fa-trash"></i>
+		</a>
+	</div>
+
+</section>

@@ -1,0 +1,251 @@
+<!--
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	&lt;!&ndash; General META &ndash;&gt;
+	<meta charset="utf-8">
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+	&lt;!&ndash; Semantic META &ndash;&gt;
+	<meta name="keywords" content="{{keywords}}">
+	<meta name="description" content="{{description}}">
+
+	&lt;!&ndash; Facebook META &ndash;&gt;
+	<meta property="fb:app_id" content="{{facebookAppId}}">
+	<meta property="og:site_name" content="{{title}}">
+	<meta property="og:title" content="{{title}}">
+	<meta property="og:description" content="{{description}}">
+	<meta property="og:url" content="{{url}}">
+	<meta property="og:image" content="/img/brand/logo.png">
+	<meta property="og:type" content="website">
+
+	<title>{{title}} | Home</title>
+
+	&lt;!&ndash; Fav Icon &ndash;&gt;
+	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+	&lt;!&ndash;Application CSS Files&ndash;&gt;
+	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+	&lt;!&ndash; FontAwesome 4.3.0 &ndash;&gt;
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	&lt;!&ndash; Ionicons 2.0.0 &ndash;&gt;
+	<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+	&lt;!&ndash; HTML5 Shim &ndash;&gt;
+	&lt;!&ndash;[if lt IE 9]>
+		<!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]&ndash;&gt;
+</head>
+
+<body class="ng-cloak" class="skin-blue">
+<div class="wrapper">
+
+	<header  class="main-header" data-ng-include="'/modules/core/views/header.client.view.html'"></header>
+	<aside class="main-sidebar">
+		&lt;!&ndash; sidebar: style can be found in sidebar.less &ndash;&gt;
+		<section class="sidebar">
+			<navigation></navigation>
+		</section>
+		&lt;!&ndash; /.sidebar &ndash;&gt;
+	</aside>
+	&lt;!&ndash; Content Wrapper. Contains page content &ndash;&gt;
+	<div class="content-wrapper">
+		&lt;!&ndash; Content Header (Page header) &ndash;&gt;
+		{% block content %}{% endblock %}
+
+	</div>&lt;!&ndash; /.content-wrapper &ndash;&gt;
+	<footer class="main-footer">
+		<div class="pull-right hidden-xs">
+			<b>Version</b> 1.0
+		</div>
+		<strong>Copyright &copy; 2015-2016 <a href="#">Cust-O-Chat</a>.</strong> All rights reserved.
+	</footer>
+
+
+	&lt;!&ndash;Embedding The User Object&ndash;&gt;
+	<script type="text/javascript">
+		var user = {{ user | json | safe }};
+	</script>
+
+	&lt;!&ndash;Application JavaScript Files&ndash;&gt;
+	{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %} 
+
+	{% if process.env.NODE_ENV === 'development' %}
+	&lt;!&ndash;Livereload script rendered &ndash;&gt;
+	<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
+	{% endif %}
+	</div>
+</body>
+
+</html>
+-->
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="bitrApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="bitrApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="bitrApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="bitrApp" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+	<title>{{title}} | Home</title>
+
+	<!--  Fav Icon -->
+	<link href="/modules/core/img/brand/favicon.ico" rel="shortcut icon" type="image/x-icon">
+
+	<!-- Application CSS Files-->
+	{% for cssFile in cssFiles %}<link rel="stylesheet" href="{{cssFile}}">{% endfor %}
+
+	<!-- FontAwesome 4.3.0 -->
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<!--  Ionicons 2.0.0 -->
+	<link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet" type="text/css" />
+	<!--  HTML5 Shim -->
+	<!-- [if lt IE 9]>
+	<!--<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<!-- bootstrap wysihtml5 - text editor -->
+	<link href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+	<!-- <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+      <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css"> -->
+	<link rel="stylesheet" href="app.css">
+	<script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body class="skin-blue" >
+<div class="wrapper" data-ng-controller="HomeController">
+
+	<header class="main-header">
+		<!-- Logo -->
+		<a href="/" class="logo"><b>Cust</b>-O-<b>Chat</b></a>
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top" role="navigation" >
+			<!-- Sidebar toggle button-->
+			<a href="javascript:void(0)" class="sidebar-toggle" data-toggle="offcanvas" role="button" ng-if="authentication.user">
+				<span class="sr-only">Toggle navigation</span>
+			</a>
+			<div class="navbar-custom-menu" >
+				<ul class="nav navbar-nav" ng-if="authentication.user">
+					<li class="dropdown user user-menu">
+						<a class="dropdown-toggle" data-toggle="dropdown">
+							<img user-avatar user-id="authentication.user._id" user_name="authentication.user.displayName" class="user-image" />
+							<span class="hidden-xs">{{authentication.user.displayName}}</span>
+						</a>
+						<ul class="dropdown-menu">
+							<!-- User image -->
+							<li class="user-header">
+								<img user-avatar user-id="authentication.user._id" class="img-circle" />
+								<p>
+									{{authentication.user.firstName + ' ' + authentication.user.lastName}}
+									<!--<small>Last Login {{lastSeen}}</small>-->
+								</p>
+							</li>
+							<li class="user-footer">
+								<div class="pull-left">
+									<a href="#!/user/profile" class="btn btn-default btn-flat">Profile</a>
+								</div>
+								<div class="pull-right">
+									<a href="/auth/signout" class="btn btn-default btn-flat">Sign out</a>
+								</div>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="main-sidebar" ng-if="authentication.user">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+			<ul class="sidebar-menu">
+				<li class="header">MAIN NAVIGATION</li>
+				<li class="active treeview">
+					<a href="#!/">
+						<i class="fa fa-comments-o"></i> <span>Chat Room</span><span class="label label-primary pull-right">4</span>
+					</a>
+
+				</li>
+				<li class="treeview">
+					<a href="#!/history">
+						<i class="fa fa-files-o"></i>
+						<span>Archives</span>
+					</a>
+				</li>
+				<li class="treeview">
+					<a href="#!/groups">
+						<i class="fa fa-files-o"></i>
+						<span>Groups</span>
+					</a>
+				</li>
+				<li>
+					<a href="#!/contacts">
+						<i class="fa fa-th"></i> <span>Contacts</span> <!--<small class="label pull-right bg-green">12</small>-->
+					</a>
+				</li>
+				<li class="treeview" ng-if="authentication.user.type[0] === 'admin'">
+					<a href="#!/Agents">
+						<i class="fa fa-pie-chart"></i>
+						<span>Agents</span>
+					</a>
+				</li>
+				<li class="treeview">
+					<a href="#!/settings">
+						<i class="fa fa-laptop"></i>
+						<span>Settings</span>
+					</a>
+				</li>
+
+			</ul>
+		</section>
+		<!-- /.sidebar -->
+	</aside>
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		{% block content %}{% endblock %}
+	</div>
+	<footer class="main-footer">
+		<div class="pull-right hidden-xs">
+			<b>Version</b> 1.0
+		</div>
+		<strong>Copyright &copy; 2015-2016 <a href="#">Cust-O-Chat</a>.</strong> All rights reserved.
+	</footer>
+</div>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+
+
+<script type="text/javascript">
+	var user = {{ user | json | safe }};
+</script>
+
+<!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+-->
+<!--Application JavaScript Files-->
+{% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>{% endfor %}
+
+{% if process.env.NODE_ENV === 'development' %}
+<!--Livereload script rendered -->
+<script type="text/javascript" src="http://{{request.hostname}}:35729/livereload.js"></script>
+{% endif %}
+
+
+</body>
+</html>
+
