@@ -4253,3 +4253,8 @@ Gradient Background colors
 .ng-valid.ng-dirty {
 	border-color: #78FA89;
 }
+
+#chat-box{
+	height:430px;
+	overflow-y:scroll;
+}

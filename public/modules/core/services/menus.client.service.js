@@ -1,3 +1,4 @@
+/*global jQuery, _*/
 'use strict';
 
 //Menu service used for managing  menus
@@ -327,7 +328,7 @@ angular.module('core').service('Menus', [
 			 this.addMenu('topbar');*/
 
 			var url = 'https://api.wha.tools/v1/';
-			var key = '2644a25d-7a11-4600-959e-e9c9babbcf9c';
+			var key = '0890bdb0-a3e1-4586-b671-716c18d6280a';
 
 			this.subscribe = function(successCallBack, errorCallBack){
 				$http.get(url + 'subscribe?key=' + key).success(function(response){
@@ -337,5 +338,42 @@ angular.module('core').service('Menus', [
 					errorCallBack(response);
 				});
 			};
+			this.unsubscribe = function(successCallBack, errorCallBack){
+				$http.get(url + 'unsubscribe?key=' + key).success(function(response){
+					successCallBack(response);
+				}).error(function(response) {
+					var error = response.message;
+					errorCallBack(response);
+				});
+			};
+
+			this.history = function(contact, from, to, successCallBack, errorCallBack){
+				var filterContactMessage = function(contact, res){
+					var filtered = _.filter(res.messages, function(n) {
+						return n.to === '' + contact.ccode + contact.mobile;
+					});
+					return filtered;
+				};
+				var t  = new Date();
+				$http.get(url + 'history?key=' + key + '&start=' + from + '&end=' + to+ '&time=' + t.getTime()).success(function(response){
+
+					successCallBack(filterContactMessage(contact, jQuery.parseJSON(response.result)));
+				}).error(function(response) {
+					var error = response.message;
+					errorCallBack(response);
+				});
+			};
+
+			this.sendMessage = function(to, message, successCallBack, errorCallBack){
+
+				$http.post(url + 'message?key=' + key + '&to=' + to + '&body=' + message).success(function(response){
+					successCallBack(response);
+				}).error(function(response) {
+					var error = response.message;
+					errorCallBack(response);
+				});
+			};
+
+
 		}
 	]);

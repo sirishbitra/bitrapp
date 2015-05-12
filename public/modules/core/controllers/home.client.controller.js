@@ -1,3 +1,4 @@
+/*global jQuery*/
 'use strict';
 
 
@@ -19,8 +20,6 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 				$scope.isSubcribe = false;
 			});
 		}
-
-		console.log('home ');
 
 		$scope.chatRoom = function(){
 			//console.log('chat room');
@@ -49,18 +48,90 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 		},
 		templateUrl: 'modules/core/views/chatroom.client.view.html'
 	};
-}).directive('chatBox', function() {
+}).directive('chatBox',  function(Watools) {
 	return {
 		restrict: 'E',
 		templateUrl: 'modules/core/views/chatbox.client.view.html',
 		scope: {
-			chatUser: '='
+			chatUser: '=',
+			authUser: '='
 		},
-		controller: function($scope) {
+		controller: function($scope, $interval) {
 			//TODO: getMessages of the user.
+			$scope.chatHistory = [];
+			var interval;
+
+			var d = new Date();
+			var to = d.getTime();
+			d.setDate(d.getDate() - 3);
+			var from = d.getTime();
+
+			var generateHistory = function(cb){
+				Watools.history($scope.chatUser, ($scope.fromTime)? $scope.fromTime : from, to, function(res){
+					$scope.chatHistory = res;
+					if(cb){cb();}
+				}, function(err){
+					console.log(err);
+				});
+			};
+
+			$scope.avatarUserId = function(msg){
+				if(msg.mine === false){
+					return $scope.authUser._id;
+				} else {
+					return $scope.chatUser._id;
+				}
+			};
+			$scope.userName = function(msg){
+				if(msg.mine === true){
+					return ($scope.authUser.name) ? $scope.authUser.name : 'me';
+				} else {
+					return ($scope.chatUser.name) ? $scope.chatUser.name : '' + $scope.chatUser.ccode + $scope.chatUser.mobile;
+				}
+			};
+
+			if($scope.chatUser){
+
+				generateHistory();
+			}
+
+			$scope.$watch('chatUser', function(){
+				$scope.chatHistory = [];
+				generateHistory(function(){
+					$scope.fromTime = ($scope.chatHistory[0] && $scope.chatHistory[0].stamp) ? $scope.chatHistory[0].stamp : from;
+				});
+
+			});
+
+			$scope.submitChat = function(msg, cb){
+				$scope.chatHistory.push({mine:true, body: msg, to: '' + $scope.chatUser.ccode + $scope.chatUser.mobile });
+				generateHistory(function(){
+					Watools.sendMessage('' + $scope.chatUser.ccode + $scope.chatUser.mobile, msg, function(res){
+						$scope.chatHistory.push({mine:true, body: msg, to: '' + $scope.chatUser.ccode + $scope.chatUser.mobile });
+						//generateHistory();
+						if(cb){cb();}
+					}, function(err){
+						console.log(err);
+					});
+				});
+
+			};
+			$interval.cancel(interval);
+			interval = $interval(function(){
+				generateHistory();
+			}, 10000);
 
 		},
 		link: function(scope, element){
+			element.find('#chatBoxBtn').click(function(){
+				var msg = element.find('#chatBox').val();
+				if(jQuery.trim(msg) !== ''){
+					scope.submitChat(element.find('#chatBox').val(), function(){
+						element.find('#chatBox').val('');
+					});
+				}
+			});
+
 
 		}
 	};
